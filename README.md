@@ -2,7 +2,7 @@
 
 A vault on NEAR where a risky trade only executes if a jury of AI agents clears it. Each juror stakes its own NEAR, and the contract verifies that each verdict really came from the model, using the signature NEAR AI Cloud's enclave puts on every answer.
 
-Built at NEAR HACKATHON. Tracks: AI Swarms, Unstoppable DeFi, AI Security. Testnet only.
+Built at NEAR HACKATHON 2026. Tracks: AI Swarms, AI Security, Agent Economy, Unstoppable DeFi. Testnet only.
 
 Live contract: [`litmus-jury.testnet`](https://testnet.nearblocks.io/address/litmus-jury.testnet)
 
@@ -54,7 +54,7 @@ Open http://localhost:3000/app. You see the live vault and the docket of past tr
 scripts/deploy-testnet.sh <suffix>
 ```
 
-This creates six testnet accounts, deploys the contract and prints what to put in `agents/.env` and `web/.env.local`. Then, in two terminals from the project root:
+This creates six testnet accounts, deploys the contract and prints what to put in `agents/.env` and `web/.env.local`. Copy `agents/.env.example` to `agents/.env` first. A model key there is optional: without one the agents use their fixed rules and stake without a proof. Then, in two terminals from the project root:
 
 ```bash
 node agents/jury.mjs
@@ -116,6 +116,8 @@ Over 124 days of real prices (13 July to 13 November 2026) and 1,000 random trad
 - A thin market is cheap to capture. The manager is barred from staking, but a second account is not. A real version needs total stake to scale with trade size.
 - Settlement uses a short price window, which rewards luck as well as judgement.
 - One market at a time, and one vault.
+- A model call can time out. The agent then falls back to its fixed rule for that decision, and a juror that falls back stakes without a proof.
+- So the demo can be repeated, the keeper has the richest juror top up any demo account that runs low on testnet NEAR. A real deployment would not move money between jurors.
 - A contract cannot know its own transaction hash, so docket rows link to the contract's explorer page, not to each transaction.
 
 ## What is in here
@@ -127,7 +129,7 @@ Over 124 days of real prices (13 July to 13 November 2026) and 1,000 random trad
 | `web/` | The Next.js app: landing page, courtroom, replay, how it works |
 | `scripts/` | Testnet deploy, the replay simulation and its price snapshot |
 
-## NEAR pieces used
+## How NEAR fits in
 
 - A NEAR smart contract in Rust (near-sdk), deployed on testnet
 - One NEAR named account per agent, each signing its own transactions
@@ -135,9 +137,15 @@ Over 124 days of real prices (13 July to 13 November 2026) and 1,000 random trad
 - NEAR Connect (`@hot-labs/near-connect`) for human wallets
 - near-cli-rs for deployment and agent transactions
 
-## Libraries and prior code
+## Disclosures
 
-near-sdk, Next.js, React, Tailwind CSS, `@hot-labs/near-connect`. Coin icons are from cryptocurrency-icons (CC0). The app's design system (tokens, buttons, panels, the sidebar shell) was written before this project took its current shape, for an earlier idea in the same hackathon window. All NEAR code, the contract and the agents were written for Litmus during the hackathon.
+- **When it was written.** Everything in this repository was written inside the hackathon window, between 27 October and 14 November 2026. There is no pre-hackathon code, and this is not an existing product from another chain.
+- **An earlier idea.** The app's design system (colour tokens, buttons, panels, the sidebar shell) was first written in the same window for a different idea, and was kept when the project became Litmus. The contract, the agents and every NEAR integration were written for Litmus.
+- **AI-generated code.** Most of the code in this repository was written with Claude Code, an AI coding assistant, directed, tested and reviewed by the author. The product also calls a language model at run time, as described above.
+- **Other entries.** This is the author's only entry in the hackathon.
+- **Libraries.** near-sdk (Rust), Next.js, React, Tailwind CSS and `@hot-labs/near-connect`. The agents and scripts use only Node's standard library and the `near` CLI.
+- **Assets and data.** Coin icons are from cryptocurrency-icons (CC0). The replay's price snapshot is public daily price data from Binance.
+- **Boilerplate.** The web app started from Create Next App.
 
 ## Licence
 
