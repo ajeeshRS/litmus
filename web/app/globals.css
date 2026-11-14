@@ -1,12 +1,15 @@
 @import "tailwindcss";
 
+/* Dark mode follows the data-theme attribute on <html>, set before paint by the script in layout.tsx. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 @theme inline {
   --font-sans: var(--font-inter), "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-serif: var(--font-instrument-serif), Georgia, serif;
 }
 
 @theme {
-  --color-canvas: #efeff0;
+  --color-canvas: #ffffff;
   --color-surface: #f8f8f8;
   --color-well: #e9e9eb;
   --color-raised: #ffffff;
@@ -75,8 +78,10 @@
 
 @layer base {
   :root {
+    color-scheme: light;
     @variant dark {
-      --color-canvas: #0f1012;
+      color-scheme: dark;
+      --color-canvas: #000000;
       --color-surface: #18191c;
       --color-well: #111214;
       --color-raised: #26272b;

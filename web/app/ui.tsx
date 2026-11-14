@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useId, useRef, useState, type ButtonHTMLAttributes, type KeyboardEvent, type ReactNode } from "react";
+import { useEffect, useId, useLayoutEffect, useRef, useState, useSyncExternalStore, type ButtonHTMLAttributes, type KeyboardEvent, type ReactNode } from "react";
 
-export type IconName = "home" | "chat" | "vote" | "users" | "settings" | "plus" | "arrow" | "chevron" | "down" | "check" | "close" | "snow" | "in" | "out" | "trend" | "link" | "bell" | "copy" | "alert" | "candles" | "pause" | "play" | "trophy" | "exit" | "target" | "scale" | "flag" | "info" | "wallet";
+export type IconName = "home" | "chat" | "vote" | "users" | "settings" | "plus" | "arrow" | "chevron" | "down" | "check" | "close" | "snow" | "in" | "out" | "trend" | "link" | "bell" | "copy" | "alert" | "candles" | "pause" | "play" | "trophy" | "exit" | "target" | "scale" | "flag" | "info" | "wallet" | "sun" | "moon";
 const paths: Record<IconName, ReactNode> = {
   home: <><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1Z" /></>,
   chat: <path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H4l-2 2v-9.5A8.5 8.5 0 1 1 21 11.5Z" />,
@@ -22,6 +22,8 @@ const paths: Record<IconName, ReactNode> = {
   exit: <><path d="M14 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4"/><path d="M10 8l-4 4 4 4M6 12h10"/></>,
   scale: <><path d="M12 4v16M7 20h10M5 7h14"/><path d="m5 7-3 7a3 3 0 0 0 6 0Zm14 0-3 7a3 3 0 0 0 6 0Z"/></>,
   flag: <path d="M5 21V4h12l-2.5 4L17 12H5"/>,
+  sun: <><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4m11.4-11.4 1.4-1.4"/></>,
+  moon: <path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/>,
   info: <><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8.5h.01"/></>,
   wallet: <><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 10h18m-5 4.5h2"/></>,
   target: <><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1" fill="currentColor"/></>,
@@ -48,6 +50,37 @@ export function Brand() {
 const tips = {top: "bottom-full left-1/2 mb-2.5 -translate-x-1/2", bottom: "top-full left-1/2 mt-2.5 -translate-x-1/2", "top-end": "bottom-full right-0 mb-2.5", "bottom-end": "top-full right-0 mt-2.5"};
 export function IconButton({label, tip, children, className = "", ...props}: ButtonHTMLAttributes<HTMLButtonElement> & {label: string; tip?: keyof typeof tips}) {
   return <button aria-label={label} className={`group relative flex shrink-0 items-center justify-center rounded-full transition-[background-color,color,box-shadow,opacity,scale] duration-200 ease-smooth active:scale-95 disabled:cursor-not-allowed disabled:opacity-30 disabled:active:scale-100 motion-reduce:transition-none ${focus} ${className}`} {...props}>{children}{tip&&<span aria-hidden="true" className={`pointer-events-none absolute z-50 hidden whitespace-nowrap rounded-xl bg-raised px-3 py-1.5 text-[12px] font-normal text-muted shadow-raised group-hover:block group-focus-visible:block ${tips[tip]}`}>{label}</span>}</button>;
+}
+/** A script that runs while the HTML is parsed. Typed as plain text on the client, so React does not warn about it there. */
+export function InlineScript({html}: {html: string}) {
+  return <script type={typeof window === "undefined" ? "text/javascript" : "text/plain"} suppressHydrationWarning dangerouslySetInnerHTML={{__html: html}}/>;
+}
+/** The saved theme, or the system setting when nothing is saved. */
+function preferredTheme() {
+  let saved: string | null = null;
+  try {saved = localStorage.getItem("litmus-theme");} catch {/* storage blocked */}
+  return saved === "light" || saved === "dark" ? saved : window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+// The theme lives on <html data-theme>. This reads it, and re-reads when it changes.
+function watchTheme(onChange: () => void) {
+  const o = new MutationObserver(onChange);
+  o.observe(document.documentElement, {attributes: true, attributeFilter: ["data-theme"]});
+  return () => o.disconnect();
+}
+const currentTheme = () => document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+/** Light and dark switch. The choice is saved, and wins over the system setting from then on. */
+export function ThemeToggle({className = "size-10 text-muted hover:bg-raised hover:text-ink hover:shadow-raised"}: {className?: string}) {
+  const theme = useSyncExternalStore(watchTheme, currentTheme, () => "light");
+  const next = theme === "dark" ? "light" : "dark";
+  // The script in layout.tsx sets the attribute before paint. In development React can clear it on its strict-mode remount, so put it back.
+  useLayoutEffect(() => {
+    if (!document.documentElement.dataset.theme) document.documentElement.dataset.theme = preferredTheme();
+  }, []);
+  function flip() {
+    document.documentElement.dataset.theme = next;
+    try {localStorage.setItem("litmus-theme", next);} catch {/* storage blocked: the switch still works for this visit */}
+  }
+  return <IconButton label={`Switch to ${next} mode`} tip="bottom-end" onClick={flip} className={className}><Icon name={theme === "dark" ? "sun" : "moon"}/></IconButton>;
 }
 export function Panel({children, className = ""}: {children: ReactNode; className?: string}) {
   return <section className={`rounded-card bg-surface shadow-surface ${className}`}>{children}</section>;

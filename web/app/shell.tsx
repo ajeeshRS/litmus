@@ -6,7 +6,7 @@ import { createContext, useContext, useState, type ReactNode } from "react";
 import { config, formatNear, shortAccount } from "./lib/adapter";
 import { useWallet, type Wallet } from "./lib/wallet";
 import { Account, ErrorLine, Person } from "./parts";
-import { Brand, Button, Icon, IconButton, Modal, focus, type IconName } from "./ui";
+import { Brand, Button, Icon, IconButton, Modal, ThemeToggle, focus, type IconName } from "./ui";
 
 const nav: {href:string; label:string; icon:IconName}[] = [
   {href:"/app", label:"Courtroom", icon:"scale"},
@@ -54,7 +54,7 @@ export default function Shell({children}:{children:ReactNode}) {
       <header className="flex h-16 items-center justify-between gap-3 px-5 sm:px-8 xl:px-12">
         <div className="hidden min-w-0 items-center gap-2 text-[13px] lg:flex"><span className="text-muted">Litmus</span><span className="text-faint">/</span><span>{nav[navIndex]?.label ?? "Page"}</span>{contract && <><span className="ml-3 rounded-full bg-fill py-1 pl-3 pr-1 text-[12px] text-muted"><Account id={contract}/><IconButton label="Copy contract id" tip="bottom" onClick={copyContract} className="ml-1 inline-flex size-6 align-middle text-muted hover:bg-fill-strong hover:text-ink"><Icon name="copy" className="size-3.5"/></IconButton></span></>}</div>
         <Link href="/" className={`flex min-w-0 items-center rounded-xl lg:hidden ${focus}`}><Brand/></Link>
-        <div className="flex items-center gap-3"><span className="rounded-full bg-fill px-2.5 py-1 text-[11px] text-muted"><span className="sm:hidden">Testnet</span><span className="hidden sm:inline">NEAR testnet, mock swaps</span></span><span className="h-5 w-px bg-line"/>{accountId
+        <div className="flex items-center gap-3"><span className="rounded-full bg-fill px-2.5 py-1 text-[11px] text-muted"><span className="sm:hidden">Testnet</span><span className="hidden sm:inline">NEAR testnet, mock swaps</span></span><ThemeToggle/><span className="h-5 w-px bg-line"/>{accountId
           ? <Button size="sm" onClick={() => setAccount(true)} aria-haspopup="dialog"><Icon name="wallet" className="size-4"/><span className="max-w-[9rem] truncate">{shortAccount(accountId)}</span></Button>
           : <Button variant="primary" size="sm" disabled={connecting} onClick={() => void wallet.connect()}>{connecting ? "Connecting…" : "Connect wallet"}</Button>}</div>
       </header>

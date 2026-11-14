@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState, type ReactNode } from "react";
-import { Brand, Icon, Logo, Segmented, buttonClass, focus, monogram, type IconName } from "./ui";
+import { Brand, Icon, Logo, Segmented, ThemeToggle, buttonClass, focus, monogram, type IconName } from "./ui";
 
 const intro=[
   {tab:"propose",lead:"the manager proposes.",text:"a big trade, or one in a new asset, gets flagged before it can run."},
@@ -39,7 +39,7 @@ export default function Landing() {
       <div className="mx-auto flex h-[72px] max-w-[1200px] items-center justify-between gap-4 px-5 sm:h-[88px] sm:px-10">
         <Brand/>
         <nav className="hidden items-center gap-8 text-[13px] md:flex"><a href="#how" className={`rounded transition-colors hover:text-muted ${focus}`}>How it works</a><a href="#features" className={`rounded transition-colors hover:text-muted ${focus}`}>Why it holds</a><a href="#real" className={`rounded transition-colors hover:text-muted ${focus}`}>What’s real</a><a href="#faq" className={`rounded transition-colors hover:text-muted ${focus}`}>Questions</a></nav>
-        <div className="flex items-center gap-1"><Link href="/replay" className={buttonClass("ghost","sm","md:hidden")}>Replay</Link><Link href="/app" className={buttonClass("primary","sm")}>Open the courtroom</Link></div>
+        <div className="flex items-center gap-1"><Link href="/replay" className={buttonClass("ghost","sm","max-sm:hidden md:hidden")}>Replay</Link><ThemeToggle className="size-9 text-muted hover:bg-fill hover:text-ink"/><Link href="/app" className={buttonClass("primary","sm")}>Open the courtroom</Link></div>
       </div>
     </header>
     <main>
