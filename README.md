@@ -4,7 +4,8 @@ A vault on NEAR where a risky trade only executes if a jury of AI agents clears 
 
 Built at NEAR HACKATHON 2026. Tracks: AI Swarms, AI Security, Agent Economy, Unstoppable DeFi. Testnet only.
 
-Live contract: [`litmus-jury.testnet`](https://testnet.nearblocks.io/address/litmus-jury.testnet)
+- Live site: [litmus-near.vercel.app](https://litmus-near.vercel.app)
+- Live contract: [`litmus-jury.testnet`](https://testnet.nearblocks.io/address/litmus-jury.testnet)
 
 ## The problem
 
@@ -46,7 +47,7 @@ You see drawdown and final-pot statistics for 1,000 simulated traders with and w
 cd web && pnpm install && cp .env.example .env.local && pnpm dev
 ```
 
-Open http://localhost:3000/app. You see the live vault and the docket of past trades read from the testnet contract, with a "Live" badge. Press **Run demo**: with no agents running it plays a recorded run (the badge changes to "Recorded run"), ending on a blocked trade and what it would have cost. `/replay` shows the simulation from step 3 and `/how` explains the mechanism.
+Open http://localhost:3000/app (the same app is hosted at [litmus-near.vercel.app/app](https://litmus-near.vercel.app/app)). You see the live vault and the docket of past trades read from the testnet contract, with a "Live" badge. Press **Run demo**: with no agents running it plays a recorded run (the badge changes to "Recorded run"), ending on a blocked trade and what it would have cost. `/replay` shows the simulation from step 3 and `/how` explains the mechanism.
 
 **5. A real run on testnet** (needs the `near` CLI and your own accounts)
 
