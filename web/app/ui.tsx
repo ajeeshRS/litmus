@@ -40,7 +40,7 @@ export function Button({children, variant = "secondary", size = "md", className 
   return <button className={buttonClass(variant, size, className)} {...props}>{children}</button>;
 }
 export function Logo({className = "size-7"}: {className?: string}) {
-  return <svg viewBox="0 0 32 32" className={`shrink-0 ${className}`} aria-hidden="true"><rect width="32" height="32" rx="9" className="fill-accent"/><path d="M8.5 11 14.5 22.5 24 9" fill="none" className="stroke-on-accent" strokeWidth="3.6" strokeLinecap="round" strokeLinejoin="round"/></svg>;
+  return <svg viewBox="0 0 32 32" className={`shrink-0 ${className}`} aria-hidden="true"><rect width="32" height="32" rx="9" className="fill-accent"/><g className="fill-on-accent"><rect x="9.75" y="6" width="6.5" height="20" rx="3.25"/><circle cx="21.5" cy="22.75" r="3.25"/></g></svg>;
 }
 export function Brand() {
   return <span className="flex items-center gap-2 text-[19px] font-semibold leading-none tracking-[-.035em]"><Logo/>litmus</span>;
