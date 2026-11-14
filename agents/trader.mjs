@@ -9,8 +9,8 @@
 //   - BTC, ETH, SOL and NEAR are priced from the live market (Binance, then CoinGecko), both for
 //     the quote and for settlement. Whatever the market does in the window is what settles.
 //   - FROGE is a made-up token for the "bad trade" round. Its price and its fall are scripted.
-//   - Every blocked bad trade moves the manager's bond to the jurors. So the demo can be repeated,
-//     the richest juror sends testnet NEAR back to the manager when it runs short. Demo plumbing only.
+//   - Every run moves the manager's bond and the losing juror's stake to the jurors who were right.
+//     So the demo can be repeated, the richest juror tops up any account that runs short. Demo plumbing only.
 //   - With LLM_API_KEY set, a model writes each proposal (asset, size, reason) from a brief for
 //     that round, within bounds. Without a key, or if a call fails, a fixed proposal is used.
 import { createServer } from "node:http";
@@ -116,19 +116,27 @@ if (!manager) {
 const waitUntil = async (ms) => { const d = ms - Date.now(); if (d > 0) await sleep(d + 1500); };
 const units = (amount, decimals) => String(BigInt(Math.round(amount * 1e6)) * 10n ** BigInt(decimals - 6));
 
-/** Make sure the manager can post its bond. The bond drains to the jurors, so they send some back. */
-async function fundManager() {
+/**
+ * Keep the demo's own accounts funded. Each run moves the manager's bond and the losing juror's
+ * stake to the jurors who were right, so over a few runs the manager and one juror run dry while
+ * the others pile up testnet NEAR. Before a run, the richest juror tops up whoever is short.
+ * Demo plumbing between our own test accounts; a real deployment would not do this.
+ */
+async function fundAccounts() {
   const vault = await view("get_vault");
   const owed = Number((BigInt(vault.bond_required_near) - BigInt(vault.bond_near)) / 10n ** 21n) / 1000;
-  const need = Math.max(0, owed) + 0.5; // the bond still to post, plus gas for the run
-  const have = await balance(manager);
-  if (have >= need) return;
   const jurors = (process.env.JURORS ?? "").split(",").map((x) => x.trim()).filter(Boolean);
-  const rich = (await Promise.all(jurors.map(async (j) => ({ j, near: await balance(j) })))).sort((a, b) => b.near - a.near)[0];
-  const send = Math.ceil(need - have + 2);
-  if (!rich || rich.near < send + 3) throw new Error(`The trader account has ${have.toFixed(2)} NEAR and needs ${need.toFixed(2)} for its bond and gas. Top it up from the testnet faucet.`);
-  await transfer(rich.j, manager, send);
-  log("trader", `${rich.j} sent ${send} NEAR back to the manager so it can post its bond`);
+  const purse = await Promise.all(jurors.map(async (account) => ({ account, near: await balance(account) })));
+  // What each account needs for one run: the manager its bond and gas, a juror two stakes and gas.
+  const needs = [{ account: manager, near: await balance(manager), need: Math.max(0, owed) + 0.5, who: "manager" }, ...purse.map((p) => ({ ...p, need: 3.5, who: "juror" }))];
+  for (const short of needs.filter((n) => n.near < n.need)) {
+    const rich = purse.filter((p) => p.account !== short.account).sort((x, y) => y.near - x.near)[0];
+    const send = Math.ceil(short.need - short.near + 2);
+    if (!rich || rich.near < send + 4) throw new Error(`${short.account} has ${short.near.toFixed(2)} NEAR and needs ${short.need.toFixed(2)} for a run. Top it up from the testnet faucet.`);
+    await transfer(rich.account, short.account, send);
+    rich.near -= send;
+    log("keeper", `${rich.account} sent ${send} NEAR to the ${short.who} ${short.account}, which was running low`);
+  }
 }
 
 let running = false;
@@ -139,7 +147,7 @@ async function run() {
   lastError = null;
   try {
     if (await view("get_active_market")) throw new Error("A market is still open. Wait for it to settle.");
-    await fundManager();
+    await fundAccounts();
     let mkt = await market();
     log("trader", `prices from ${mkt.source}: ${Object.keys(MAJORS).map((a) => `${a} $${mkt[a].price}`).join(", ")}`);
     // Put the mock vault back to about $10,000 (6,000 USDC and $4,000 of NEAR), so every run starts the same.
