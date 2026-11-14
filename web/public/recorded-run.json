@@ -1,0 +1,1084 @@
+{
+ "note": "Recorded scenario. Not live chain data.",
+ "initial": {
+  "vault": {
+   "pot_value_usd": "10000000000",
+   "holdings": [
+    {
+     "asset": "USDC",
+     "amount": "6000000000",
+     "decimals": 6,
+     "value_usd": "6000000000"
+    },
+    {
+     "asset": "NEAR",
+     "amount": "1600000000000000000000000000",
+     "decimals": 24,
+     "value_usd": "4000000000"
+    }
+   ],
+   "manager": {
+    "account_id": "trader.testnet",
+    "kind": "Scripted"
+   },
+   "bond_near": "2000000000000000000000000",
+   "threshold_bps": 500,
+   "min_stake_near": "100000000000000000000000"
+  },
+  "markets": [
+   {
+    "id": "h2",
+    "state": "Settled",
+    "proposal": {
+     "action": "Buy",
+     "asset": "PEPE2",
+     "size_bps": 2500,
+     "size_usd": "2500000000",
+     "reason": "Copying a wallet that made 9x on it last week.",
+     "quote_price_usd": "41200",
+     "flags": [
+      "Size is 25% of the pot (limit 5%)",
+      "New asset: never held before"
+     ]
+    },
+    "proposed_at_ms": -10800000,
+    "opened_at_ms": -10792000,
+    "close_time_ms": -10732000,
+    "yes_near": "1000000000000000000000000",
+    "no_near": "5000000000000000000000000",
+    "verdict": "Blocked",
+    "executed": false,
+    "settlement": {
+     "price_move_bps": -1840,
+     "pnl_usd": "-460000000",
+     "payouts": [
+      {
+       "account_id": "liq-jury.testnet",
+       "amount_near": "4800000000000000000000000"
+      },
+      {
+       "account_id": "sceptic-jury.testnet",
+       "amount_near": "3200000000000000000000000"
+      }
+     ],
+     "bond_result": "Slashed",
+     "bond_amount_near": "2000000000000000000000000",
+     "pot_effect_usd": "0"
+    },
+    "tx_hash": null
+   },
+   {
+    "id": "h1",
+    "state": "Settled",
+    "proposal": {
+     "action": "Buy",
+     "asset": "NEAR",
+     "size_bps": 1000,
+     "size_usd": "1000000000",
+     "reason": "Add to the core NEAR position after a 6% dip.",
+     "quote_price_usd": "2500000",
+     "flags": [
+      "Size is 10% of the pot (limit 5%)"
+     ]
+    },
+    "proposed_at_ms": -18000000,
+    "opened_at_ms": -17992000,
+    "close_time_ms": -17932000,
+    "yes_near": "3500000000000000000000000",
+    "no_near": "1000000000000000000000000",
+    "verdict": "Approved",
+    "executed": true,
+    "settlement": {
+     "price_move_bps": 90,
+     "pnl_usd": "9000000",
+     "payouts": [
+      {
+       "account_id": "sizer-jury.testnet",
+       "amount_near": "2571429000000000000000000"
+      },
+      {
+       "account_id": "liq-jury.testnet",
+       "amount_near": "1928571000000000000000000"
+      }
+     ],
+     "bond_result": "Returned",
+     "bond_amount_near": "2000000000000000000000000",
+     "pot_effect_usd": "9000000"
+    },
+    "tx_hash": null
+   }
+  ],
+  "stakes_by_market": {
+   "h1": [
+    {
+     "account_id": "sizer-jury.testnet",
+     "side": "Yes",
+     "amount_near": "2000000000000000000000000",
+     "time_ms": 0,
+     "note": "sizer: 10% is above the limit but the pot can absorb it."
+    },
+    {
+     "account_id": "liq-jury.testnet",
+     "side": "Yes",
+     "amount_near": "1500000000000000000000000",
+     "time_ms": 0,
+     "note": "liquidity: NEAR is a deep market. The vault can exit at any time."
+    },
+    {
+     "account_id": "sceptic-jury.testnet",
+     "side": "No",
+     "amount_near": "1000000000000000000000000",
+     "time_ms": 0,
+     "note": "sceptic: Sound idea, but I would have sized it smaller."
+    }
+   ],
+   "h2": [
+    {
+     "account_id": "liq-jury.testnet",
+     "side": "No",
+     "amount_near": "3000000000000000000000000",
+     "time_ms": 0,
+     "note": "liquidity: PEPE2 is new to the vault and not a deep market. Hard to exit."
+    },
+    {
+     "account_id": "sceptic-jury.testnet",
+     "side": "No",
+     "amount_near": "2000000000000000000000000",
+     "time_ms": 0,
+     "note": "sceptic: Copying one wallet is not a thesis."
+    },
+    {
+     "account_id": "momo-jury.testnet",
+     "side": "Yes",
+     "amount_near": "1000000000000000000000000",
+     "time_ms": 0,
+     "note": "momentum: PEPE2 has buyers right now. I would follow them."
+    }
+   ]
+  }
+ },
+ "frames": [
+  {
+   "t_ms": 1000,
+   "active": {
+    "id": "m1",
+    "state": "Proposed",
+    "proposal": {
+     "action": "Buy",
+     "asset": "BTC",
+     "size_bps": 300,
+     "size_usd": "300000000",
+     "reason": "Start a small BTC position with idle USDC.",
+     "quote_price_usd": "100000000000",
+     "flags": []
+    },
+    "proposed_at_ms": 1000,
+    "opened_at_ms": null,
+    "close_time_ms": null,
+    "yes_near": "0",
+    "no_near": "0",
+    "verdict": null,
+    "executed": false,
+    "settlement": null,
+    "tx_hash": null
+   },
+   "stakes": []
+  },
+  {
+   "t_ms": 8000,
+   "active": null,
+   "vault": {
+    "pot_value_usd": "10000000000",
+    "holdings": [
+     {
+      "asset": "USDC",
+      "amount": "5700000000",
+      "decimals": 6,
+      "value_usd": "5700000000"
+     },
+     {
+      "asset": "NEAR",
+      "amount": "1600000000000000000000000000",
+      "decimals": 24,
+      "value_usd": "4000000000"
+     },
+     {
+      "asset": "BTC",
+      "amount": "300000",
+      "decimals": 8,
+      "value_usd": "300000000"
+     }
+    ],
+    "manager": {
+     "account_id": "trader.testnet",
+     "kind": "Scripted"
+    },
+    "bond_near": "2000000000000000000000000",
+    "threshold_bps": 500,
+    "min_stake_near": "100000000000000000000000"
+   },
+   "docket_add": {
+    "id": "m1",
+    "state": "PassedInstantly",
+    "proposal": {
+     "action": "Buy",
+     "asset": "BTC",
+     "size_bps": 300,
+     "size_usd": "300000000",
+     "reason": "Start a small BTC position with idle USDC.",
+     "quote_price_usd": "100000000000",
+     "flags": []
+    },
+    "proposed_at_ms": 1000,
+    "opened_at_ms": null,
+    "close_time_ms": null,
+    "yes_near": "0",
+    "no_near": "0",
+    "verdict": "Approved",
+    "executed": true,
+    "settlement": null,
+    "tx_hash": null
+   }
+  },
+  {
+   "t_ms": 14000,
+   "active": {
+    "id": "m2",
+    "state": "Proposed",
+    "proposal": {
+     "action": "Buy",
+     "asset": "ETH",
+     "size_bps": 1500,
+     "size_usd": "1500000000",
+     "reason": "Rotate idle USDC into ETH. The pot is 57% stablecoins.",
+     "quote_price_usd": "3500000000",
+     "flags": [
+      "Size is 15% of the pot (limit 5%)"
+     ]
+    },
+    "proposed_at_ms": 14000,
+    "opened_at_ms": null,
+    "close_time_ms": null,
+    "yes_near": "0",
+    "no_near": "0",
+    "verdict": null,
+    "executed": false,
+    "settlement": null,
+    "tx_hash": null
+   },
+   "stakes": []
+  },
+  {
+   "t_ms": 20000,
+   "active": {
+    "id": "m2",
+    "state": "Open",
+    "proposal": {
+     "action": "Buy",
+     "asset": "ETH",
+     "size_bps": 1500,
+     "size_usd": "1500000000",
+     "reason": "Rotate idle USDC into ETH. The pot is 57% stablecoins.",
+     "quote_price_usd": "3500000000",
+     "flags": [
+      "Size is 15% of the pot (limit 5%)"
+     ]
+    },
+    "proposed_at_ms": 14000,
+    "opened_at_ms": 20000,
+    "close_time_ms": 50000,
+    "yes_near": "0",
+    "no_near": "0",
+    "verdict": null,
+    "executed": false,
+    "settlement": null,
+    "tx_hash": null
+   }
+  },
+  {
+   "t_ms": 24000,
+   "active": {
+    "id": "m2",
+    "state": "Open",
+    "proposal": {
+     "action": "Buy",
+     "asset": "ETH",
+     "size_bps": 1500,
+     "size_usd": "1500000000",
+     "reason": "Rotate idle USDC into ETH. The pot is 57% stablecoins.",
+     "quote_price_usd": "3500000000",
+     "flags": [
+      "Size is 15% of the pot (limit 5%)"
+     ]
+    },
+    "proposed_at_ms": 14000,
+    "opened_at_ms": 20000,
+    "close_time_ms": 50000,
+    "yes_near": "2000000000000000000000000",
+    "no_near": "0",
+    "verdict": null,
+    "executed": false,
+    "settlement": null,
+    "tx_hash": null
+   },
+   "stakes": [
+    {
+     "account_id": "sizer-jury.testnet",
+     "side": "Yes",
+     "amount_near": "2000000000000000000000000",
+     "time_ms": 24000,
+     "note": "sizer: 15% is above the limit but the pot can absorb it."
+    }
+   ]
+  },
+  {
+   "t_ms": 28000,
+   "active": {
+    "id": "m2",
+    "state": "Open",
+    "proposal": {
+     "action": "Buy",
+     "asset": "ETH",
+     "size_bps": 1500,
+     "size_usd": "1500000000",
+     "reason": "Rotate idle USDC into ETH. The pot is 57% stablecoins.",
+     "quote_price_usd": "3500000000",
+     "flags": [
+      "Size is 15% of the pot (limit 5%)"
+     ]
+    },
+    "proposed_at_ms": 14000,
+    "opened_at_ms": 20000,
+    "close_time_ms": 50000,
+    "yes_near": "3500000000000000000000000",
+    "no_near": "0",
+    "verdict": null,
+    "executed": false,
+    "settlement": null,
+    "tx_hash": null
+   },
+   "stakes": [
+    {
+     "account_id": "sizer-jury.testnet",
+     "side": "Yes",
+     "amount_near": "2000000000000000000000000",
+     "time_ms": 24000,
+     "note": "sizer: 15% is above the limit but the pot can absorb it."
+    },
+    {
+     "account_id": "liq-jury.testnet",
+     "side": "Yes",
+     "amount_near": "1500000000000000000000000",
+     "time_ms": 28000,
+     "note": "liquidity: ETH is a deep market. The vault can exit at any time."
+    }
+   ]
+  },
+  {
+   "t_ms": 33000,
+   "active": {
+    "id": "m2",
+    "state": "Open",
+    "proposal": {
+     "action": "Buy",
+     "asset": "ETH",
+     "size_bps": 1500,
+     "size_usd": "1500000000",
+     "reason": "Rotate idle USDC into ETH. The pot is 57% stablecoins.",
+     "quote_price_usd": "3500000000",
+     "flags": [
+      "Size is 15% of the pot (limit 5%)"
+     ]
+    },
+    "proposed_at_ms": 14000,
+    "opened_at_ms": 20000,
+    "close_time_ms": 50000,
+    "yes_near": "3500000000000000000000000",
+    "no_near": "1000000000000000000000000",
+    "verdict": null,
+    "executed": false,
+    "settlement": null,
+    "tx_hash": null
+   },
+   "stakes": [
+    {
+     "account_id": "sizer-jury.testnet",
+     "side": "Yes",
+     "amount_near": "2000000000000000000000000",
+     "time_ms": 24000,
+     "note": "sizer: 15% is above the limit but the pot can absorb it."
+    },
+    {
+     "account_id": "liq-jury.testnet",
+     "side": "Yes",
+     "amount_near": "1500000000000000000000000",
+     "time_ms": 28000,
+     "note": "liquidity: ETH is a deep market. The vault can exit at any time."
+    },
+    {
+     "account_id": "sceptic-jury.testnet",
+     "side": "No",
+     "amount_near": "1000000000000000000000000",
+     "time_ms": 33000,
+     "note": "sceptic: Sound idea, but I would have sized it smaller."
+    }
+   ]
+  },
+  {
+   "t_ms": 38000,
+   "active": {
+    "id": "m2",
+    "state": "Open",
+    "proposal": {
+     "action": "Buy",
+     "asset": "ETH",
+     "size_bps": 1500,
+     "size_usd": "1500000000",
+     "reason": "Rotate idle USDC into ETH. The pot is 57% stablecoins.",
+     "quote_price_usd": "3500000000",
+     "flags": [
+      "Size is 15% of the pot (limit 5%)"
+     ]
+    },
+    "proposed_at_ms": 14000,
+    "opened_at_ms": 20000,
+    "close_time_ms": 50000,
+    "yes_near": "4500000000000000000000000",
+    "no_near": "1000000000000000000000000",
+    "verdict": null,
+    "executed": false,
+    "settlement": null,
+    "tx_hash": null
+   },
+   "stakes": [
+    {
+     "account_id": "sizer-jury.testnet",
+     "side": "Yes",
+     "amount_near": "2000000000000000000000000",
+     "time_ms": 24000,
+     "note": "sizer: 15% is above the limit but the pot can absorb it."
+    },
+    {
+     "account_id": "liq-jury.testnet",
+     "side": "Yes",
+     "amount_near": "1500000000000000000000000",
+     "time_ms": 28000,
+     "note": "liquidity: ETH is a deep market. The vault can exit at any time."
+    },
+    {
+     "account_id": "sceptic-jury.testnet",
+     "side": "No",
+     "amount_near": "1000000000000000000000000",
+     "time_ms": 33000,
+     "note": "sceptic: Sound idea, but I would have sized it smaller."
+    },
+    {
+     "account_id": "momo-jury.testnet",
+     "side": "Yes",
+     "amount_near": "1000000000000000000000000",
+     "time_ms": 38000,
+     "note": "momentum: ETH has buyers right now. I would follow them."
+    }
+   ]
+  },
+  {
+   "t_ms": 50000,
+   "active": {
+    "id": "m2",
+    "state": "Verdict",
+    "proposal": {
+     "action": "Buy",
+     "asset": "ETH",
+     "size_bps": 1500,
+     "size_usd": "1500000000",
+     "reason": "Rotate idle USDC into ETH. The pot is 57% stablecoins.",
+     "quote_price_usd": "3500000000",
+     "flags": [
+      "Size is 15% of the pot (limit 5%)"
+     ]
+    },
+    "proposed_at_ms": 14000,
+    "opened_at_ms": 20000,
+    "close_time_ms": 50000,
+    "yes_near": "4500000000000000000000000",
+    "no_near": "1000000000000000000000000",
+    "verdict": "Approved",
+    "executed": true,
+    "settlement": null,
+    "tx_hash": null
+   },
+   "vault": {
+    "pot_value_usd": "10000000000",
+    "holdings": [
+     {
+      "asset": "USDC",
+      "amount": "4200000000",
+      "decimals": 6,
+      "value_usd": "4200000000"
+     },
+     {
+      "asset": "NEAR",
+      "amount": "1600000000000000000000000000",
+      "decimals": 24,
+      "value_usd": "4000000000"
+     },
+     {
+      "asset": "ETH",
+      "amount": "428571000000000000",
+      "decimals": 18,
+      "value_usd": "1500000000"
+     },
+     {
+      "asset": "BTC",
+      "amount": "300000",
+      "decimals": 8,
+      "value_usd": "300000000"
+     }
+    ],
+    "manager": {
+     "account_id": "trader.testnet",
+     "kind": "Scripted"
+    },
+    "bond_near": "2000000000000000000000000",
+    "threshold_bps": 500,
+    "min_stake_near": "100000000000000000000000"
+   }
+  },
+  {
+   "t_ms": 59000,
+   "active": {
+    "id": "m2",
+    "state": "Settled",
+    "proposal": {
+     "action": "Buy",
+     "asset": "ETH",
+     "size_bps": 1500,
+     "size_usd": "1500000000",
+     "reason": "Rotate idle USDC into ETH. The pot is 57% stablecoins.",
+     "quote_price_usd": "3500000000",
+     "flags": [
+      "Size is 15% of the pot (limit 5%)"
+     ]
+    },
+    "proposed_at_ms": 14000,
+    "opened_at_ms": 20000,
+    "close_time_ms": 50000,
+    "yes_near": "4500000000000000000000000",
+    "no_near": "1000000000000000000000000",
+    "verdict": "Approved",
+    "executed": true,
+    "settlement": {
+     "price_move_bps": 180,
+     "pnl_usd": "27000000",
+     "payouts": [
+      {
+       "account_id": "sizer-jury.testnet",
+       "amount_near": "2444444000000000000000000"
+      },
+      {
+       "account_id": "liq-jury.testnet",
+       "amount_near": "1833333000000000000000000"
+      },
+      {
+       "account_id": "momo-jury.testnet",
+       "amount_near": "1222222000000000000000000"
+      }
+     ],
+     "bond_result": "Returned",
+     "bond_amount_near": "2000000000000000000000000",
+     "pot_effect_usd": "27000000"
+    },
+    "tx_hash": null
+   },
+   "vault": {
+    "pot_value_usd": "10027000000",
+    "holdings": [
+     {
+      "asset": "USDC",
+      "amount": "4200000000",
+      "decimals": 6,
+      "value_usd": "4200000000"
+     },
+     {
+      "asset": "NEAR",
+      "amount": "1600000000000000000000000000",
+      "decimals": 24,
+      "value_usd": "4000000000"
+     },
+     {
+      "asset": "ETH",
+      "amount": "428571000000000000",
+      "decimals": 18,
+      "value_usd": "1527000000"
+     },
+     {
+      "asset": "BTC",
+      "amount": "300000",
+      "decimals": 8,
+      "value_usd": "300000000"
+     }
+    ],
+    "manager": {
+     "account_id": "trader.testnet",
+     "kind": "Scripted"
+    },
+    "bond_near": "2000000000000000000000000",
+    "threshold_bps": 500,
+    "min_stake_near": "100000000000000000000000"
+   }
+  },
+  {
+   "t_ms": 72000,
+   "active": null,
+   "docket_add": {
+    "id": "m2",
+    "state": "Settled",
+    "proposal": {
+     "action": "Buy",
+     "asset": "ETH",
+     "size_bps": 1500,
+     "size_usd": "1500000000",
+     "reason": "Rotate idle USDC into ETH. The pot is 57% stablecoins.",
+     "quote_price_usd": "3500000000",
+     "flags": [
+      "Size is 15% of the pot (limit 5%)"
+     ]
+    },
+    "proposed_at_ms": 14000,
+    "opened_at_ms": 20000,
+    "close_time_ms": 50000,
+    "yes_near": "4500000000000000000000000",
+    "no_near": "1000000000000000000000000",
+    "verdict": "Approved",
+    "executed": true,
+    "settlement": {
+     "price_move_bps": 180,
+     "pnl_usd": "27000000",
+     "payouts": [
+      {
+       "account_id": "sizer-jury.testnet",
+       "amount_near": "2444444000000000000000000"
+      },
+      {
+       "account_id": "liq-jury.testnet",
+       "amount_near": "1833333000000000000000000"
+      },
+      {
+       "account_id": "momo-jury.testnet",
+       "amount_near": "1222222000000000000000000"
+      }
+     ],
+     "bond_result": "Returned",
+     "bond_amount_near": "2000000000000000000000000",
+     "pot_effect_usd": "27000000"
+    },
+    "tx_hash": null
+   }
+  },
+  {
+   "t_ms": 78000,
+   "active": {
+    "id": "m3",
+    "state": "Proposed",
+    "proposal": {
+     "action": "Buy",
+     "asset": "FROGE",
+     "size_bps": 4000,
+     "size_usd": "4010800000",
+     "reason": "FROGE is up 60% today. Momentum should continue.",
+     "quote_price_usd": "8700",
+     "flags": [
+      "Size is 40% of the pot (limit 5%)",
+      "New asset: never held before"
+     ]
+    },
+    "proposed_at_ms": 78000,
+    "opened_at_ms": null,
+    "close_time_ms": null,
+    "yes_near": "0",
+    "no_near": "0",
+    "verdict": null,
+    "executed": false,
+    "settlement": null,
+    "tx_hash": null
+   },
+   "stakes": []
+  },
+  {
+   "t_ms": 86000,
+   "active": {
+    "id": "m3",
+    "state": "Open",
+    "proposal": {
+     "action": "Buy",
+     "asset": "FROGE",
+     "size_bps": 4000,
+     "size_usd": "4010800000",
+     "reason": "FROGE is up 60% today. Momentum should continue.",
+     "quote_price_usd": "8700",
+     "flags": [
+      "Size is 40% of the pot (limit 5%)",
+      "New asset: never held before"
+     ]
+    },
+    "proposed_at_ms": 78000,
+    "opened_at_ms": 86000,
+    "close_time_ms": 126000,
+    "yes_near": "0",
+    "no_near": "0",
+    "verdict": null,
+    "executed": false,
+    "settlement": null,
+    "tx_hash": null
+   }
+  },
+  {
+   "t_ms": 91000,
+   "active": {
+    "id": "m3",
+    "state": "Open",
+    "proposal": {
+     "action": "Buy",
+     "asset": "FROGE",
+     "size_bps": 4000,
+     "size_usd": "4010800000",
+     "reason": "FROGE is up 60% today. Momentum should continue.",
+     "quote_price_usd": "8700",
+     "flags": [
+      "Size is 40% of the pot (limit 5%)",
+      "New asset: never held before"
+     ]
+    },
+    "proposed_at_ms": 78000,
+    "opened_at_ms": 86000,
+    "close_time_ms": 126000,
+    "yes_near": "0",
+    "no_near": "2000000000000000000000000",
+    "verdict": null,
+    "executed": false,
+    "settlement": null,
+    "tx_hash": null
+   },
+   "stakes": [
+    {
+     "account_id": "sizer-jury.testnet",
+     "side": "No",
+     "amount_near": "2000000000000000000000000",
+     "time_ms": 91000,
+     "note": "sizer: 40% of the pot in one trade is more than it can absorb."
+    }
+   ]
+  },
+  {
+   "t_ms": 97000,
+   "active": {
+    "id": "m3",
+    "state": "Open",
+    "proposal": {
+     "action": "Buy",
+     "asset": "FROGE",
+     "size_bps": 4000,
+     "size_usd": "4010800000",
+     "reason": "FROGE is up 60% today. Momentum should continue.",
+     "quote_price_usd": "8700",
+     "flags": [
+      "Size is 40% of the pot (limit 5%)",
+      "New asset: never held before"
+     ]
+    },
+    "proposed_at_ms": 78000,
+    "opened_at_ms": 86000,
+    "close_time_ms": 126000,
+    "yes_near": "0",
+    "no_near": "5000000000000000000000000",
+    "verdict": null,
+    "executed": false,
+    "settlement": null,
+    "tx_hash": null
+   },
+   "stakes": [
+    {
+     "account_id": "sizer-jury.testnet",
+     "side": "No",
+     "amount_near": "2000000000000000000000000",
+     "time_ms": 91000,
+     "note": "sizer: 40% of the pot in one trade is more than it can absorb."
+    },
+    {
+     "account_id": "liq-jury.testnet",
+     "side": "No",
+     "amount_near": "3000000000000000000000000",
+     "time_ms": 97000,
+     "note": "liquidity: FROGE is new to the vault and not a deep market. Hard to exit."
+    }
+   ]
+  },
+  {
+   "t_ms": 104000,
+   "active": {
+    "id": "m3",
+    "state": "Open",
+    "proposal": {
+     "action": "Buy",
+     "asset": "FROGE",
+     "size_bps": 4000,
+     "size_usd": "4010800000",
+     "reason": "FROGE is up 60% today. Momentum should continue.",
+     "quote_price_usd": "8700",
+     "flags": [
+      "Size is 40% of the pot (limit 5%)",
+      "New asset: never held before"
+     ]
+    },
+    "proposed_at_ms": 78000,
+    "opened_at_ms": 86000,
+    "close_time_ms": 126000,
+    "yes_near": "0",
+    "no_near": "7000000000000000000000000",
+    "verdict": null,
+    "executed": false,
+    "settlement": null,
+    "tx_hash": null
+   },
+   "stakes": [
+    {
+     "account_id": "sizer-jury.testnet",
+     "side": "No",
+     "amount_near": "2000000000000000000000000",
+     "time_ms": 91000,
+     "note": "sizer: 40% of the pot in one trade is more than it can absorb."
+    },
+    {
+     "account_id": "liq-jury.testnet",
+     "side": "No",
+     "amount_near": "3000000000000000000000000",
+     "time_ms": 97000,
+     "note": "liquidity: FROGE is new to the vault and not a deep market. Hard to exit."
+    },
+    {
+     "account_id": "sceptic-jury.testnet",
+     "side": "No",
+     "amount_near": "2000000000000000000000000",
+     "time_ms": 104000,
+     "note": "sceptic: The reason is a price that already moved. That is chasing, not a thesis."
+    }
+   ]
+  },
+  {
+   "t_ms": 111000,
+   "active": {
+    "id": "m3",
+    "state": "Open",
+    "proposal": {
+     "action": "Buy",
+     "asset": "FROGE",
+     "size_bps": 4000,
+     "size_usd": "4010800000",
+     "reason": "FROGE is up 60% today. Momentum should continue.",
+     "quote_price_usd": "8700",
+     "flags": [
+      "Size is 40% of the pot (limit 5%)",
+      "New asset: never held before"
+     ]
+    },
+    "proposed_at_ms": 78000,
+    "opened_at_ms": 86000,
+    "close_time_ms": 126000,
+    "yes_near": "1000000000000000000000000",
+    "no_near": "7000000000000000000000000",
+    "verdict": null,
+    "executed": false,
+    "settlement": null,
+    "tx_hash": null
+   },
+   "stakes": [
+    {
+     "account_id": "sizer-jury.testnet",
+     "side": "No",
+     "amount_near": "2000000000000000000000000",
+     "time_ms": 91000,
+     "note": "sizer: 40% of the pot in one trade is more than it can absorb."
+    },
+    {
+     "account_id": "liq-jury.testnet",
+     "side": "No",
+     "amount_near": "3000000000000000000000000",
+     "time_ms": 97000,
+     "note": "liquidity: FROGE is new to the vault and not a deep market. Hard to exit."
+    },
+    {
+     "account_id": "sceptic-jury.testnet",
+     "side": "No",
+     "amount_near": "2000000000000000000000000",
+     "time_ms": 104000,
+     "note": "sceptic: The reason is a price that already moved. That is chasing, not a thesis."
+    },
+    {
+     "account_id": "momo-jury.testnet",
+     "side": "Yes",
+     "amount_near": "1000000000000000000000000",
+     "time_ms": 111000,
+     "note": "momentum: FROGE has buyers right now. I would follow them."
+    }
+   ]
+  },
+  {
+   "t_ms": 126000,
+   "active": {
+    "id": "m3",
+    "state": "Verdict",
+    "proposal": {
+     "action": "Buy",
+     "asset": "FROGE",
+     "size_bps": 4000,
+     "size_usd": "4010800000",
+     "reason": "FROGE is up 60% today. Momentum should continue.",
+     "quote_price_usd": "8700",
+     "flags": [
+      "Size is 40% of the pot (limit 5%)",
+      "New asset: never held before"
+     ]
+    },
+    "proposed_at_ms": 78000,
+    "opened_at_ms": 86000,
+    "close_time_ms": 126000,
+    "yes_near": "1000000000000000000000000",
+    "no_near": "7000000000000000000000000",
+    "verdict": "Blocked",
+    "executed": false,
+    "settlement": null,
+    "tx_hash": null
+   }
+  },
+  {
+   "t_ms": 136000,
+   "active": {
+    "id": "m3",
+    "state": "Settled",
+    "proposal": {
+     "action": "Buy",
+     "asset": "FROGE",
+     "size_bps": 4000,
+     "size_usd": "4010800000",
+     "reason": "FROGE is up 60% today. Momentum should continue.",
+     "quote_price_usd": "8700",
+     "flags": [
+      "Size is 40% of the pot (limit 5%)",
+      "New asset: never held before"
+     ]
+    },
+    "proposed_at_ms": 78000,
+    "opened_at_ms": 86000,
+    "close_time_ms": 126000,
+    "yes_near": "1000000000000000000000000",
+    "no_near": "7000000000000000000000000",
+    "verdict": "Blocked",
+    "executed": false,
+    "settlement": {
+     "price_move_bps": -3100,
+     "pnl_usd": "-1243350000",
+     "payouts": [
+      {
+       "account_id": "sizer-jury.testnet",
+       "amount_near": "2857143000000000000000000"
+      },
+      {
+       "account_id": "liq-jury.testnet",
+       "amount_near": "4285714000000000000000000"
+      },
+      {
+       "account_id": "sceptic-jury.testnet",
+       "amount_near": "2857143000000000000000000"
+      }
+     ],
+     "bond_result": "Slashed",
+     "bond_amount_near": "2000000000000000000000000",
+     "pot_effect_usd": "0"
+    },
+    "tx_hash": null
+   },
+   "vault": {
+    "pot_value_usd": "10027000000",
+    "holdings": [
+     {
+      "asset": "USDC",
+      "amount": "4200000000",
+      "decimals": 6,
+      "value_usd": "4200000000"
+     },
+     {
+      "asset": "NEAR",
+      "amount": "1600000000000000000000000000",
+      "decimals": 24,
+      "value_usd": "4000000000"
+     },
+     {
+      "asset": "ETH",
+      "amount": "428571000000000000",
+      "decimals": 18,
+      "value_usd": "1527000000"
+     },
+     {
+      "asset": "BTC",
+      "amount": "300000",
+      "decimals": 8,
+      "value_usd": "300000000"
+     }
+    ],
+    "manager": {
+     "account_id": "trader.testnet",
+     "kind": "Scripted"
+    },
+    "bond_near": "0",
+    "threshold_bps": 500,
+    "min_stake_near": "100000000000000000000000"
+   },
+   "docket_add": {
+    "id": "m3",
+    "state": "Settled",
+    "proposal": {
+     "action": "Buy",
+     "asset": "FROGE",
+     "size_bps": 4000,
+     "size_usd": "4010800000",
+     "reason": "FROGE is up 60% today. Momentum should continue.",
+     "quote_price_usd": "8700",
+     "flags": [
+      "Size is 40% of the pot (limit 5%)",
+      "New asset: never held before"
+     ]
+    },
+    "proposed_at_ms": 78000,
+    "opened_at_ms": 86000,
+    "close_time_ms": 126000,
+    "yes_near": "1000000000000000000000000",
+    "no_near": "7000000000000000000000000",
+    "verdict": "Blocked",
+    "executed": false,
+    "settlement": {
+     "price_move_bps": -3100,
+     "pnl_usd": "-1243350000",
+     "payouts": [
+      {
+       "account_id": "sizer-jury.testnet",
+       "amount_near": "2857143000000000000000000"
+      },
+      {
+       "account_id": "liq-jury.testnet",
+       "amount_near": "4285714000000000000000000"
+      },
+      {
+       "account_id": "sceptic-jury.testnet",
+       "amount_near": "2857143000000000000000000"
+      }
+     ],
+     "bond_result": "Slashed",
+     "bond_amount_near": "2000000000000000000000000",
+     "pot_effect_usd": "0"
+    },
+    "tx_hash": null
+   },
+   "end": true
+  }
+ ]
+}
