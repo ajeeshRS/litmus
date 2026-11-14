@@ -124,7 +124,7 @@ const llmHeaders = () => ({ "Content-Type": "application/json", Authorization: `
  */
 export async function askSigned(system, user) {
   const request = JSON.stringify({ model: llm.model, temperature: 0.2, max_tokens: 1500, messages: [{ role: "system", content: system }, { role: "user", content: user }] });
-  const res = await fetch(`${llmBase()}/chat/completions`, { method: "POST", headers: llmHeaders(), signal: AbortSignal.timeout(30_000), body: request });
+  const res = await fetch(`${llmBase()}/chat/completions`, { method: "POST", headers: llmHeaders(), signal: AbortSignal.timeout(15_000), body: request });
   if (!res.ok) throw new Error(`model endpoint answered ${res.status}`);
   const response = await res.text(); // the exact bytes: re-serialising would change the hash
   const body = JSON.parse(response);

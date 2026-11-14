@@ -24,7 +24,7 @@ export default function Courtroom() {
       <StatusPill kind="simulated"/>
     </PageHeading>
     <p className="sr-only" aria-live="polite">{announcement(active)}</p>
-    <div className="mt-8 grid items-start gap-4 xl:grid-cols-[1fr_1.6fr]">
+    <div className="mt-8 grid items-start gap-4 xl:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)]">
       <VaultPanel vault={vault} startRaw={state.sessionStartPotRaw} error={state.mode === "error" ? state.error : null} recorded={!live}/>
       <MarketPanel loading={loading} live={live} error={state.mode === "error" ? null : state.error} active={active} stakes={state.stakes} last={state.markets[0]} demo={state.demo} onRunDemo={() => void runDemo()}
         controls={active && vault ? active.phase === "open" ? <StakeControls market={active} vault={vault} wallet={wallet} live={live} onStaked={() => void refresh()}/> : active.phase === "settled" ? <ClaimButton market={active} wallet={wallet} live={live} onClaimed={() => void refresh()}/> : null : null}/>
@@ -38,7 +38,7 @@ export default function Courtroom() {
 function VaultPanel({vault, startRaw, error, recorded}:{vault:VaultVM|null; startRaw:string|null; error:string|null; recorded:boolean}) {
   if (!vault) return <Panel className="p-6 sm:p-8"><p className="text-[13px] text-muted">Vault pot</p><div className="mt-6">{error ? <ErrorLine>{error}</ErrorLine> : <Loading what="the vault"/>}</div></Panel>;
   const change = startRaw ? potChange(startRaw, vault.potRaw) : null;
-  return <Panel className="flex flex-col p-2">
+  return <Panel className="flex min-w-0 flex-col p-2">
     <div className="p-4 sm:p-6">
       <div className="flex items-center justify-between gap-3"><p className="text-[13px] text-muted">Vault pot</p>{change && <span className={`rounded-full bg-fill px-2.5 py-1 text-[12px] tabular-nums ${toneClass(change.sign) || "text-muted"}`}>{change.text} this session</span>}</div>
       <p className="mt-6 text-[44px] leading-none tracking-[-.06em] tabular-nums sm:text-[56px]">{vault.pot}</p>
@@ -150,7 +150,7 @@ function announcement(m:MarketVM|null) {
 
 function MarketPanel({loading, error, active, stakes, last, demo, live, onRunDemo, controls}:{loading:boolean; live:boolean; error:string|null; active:MarketVM|null; stakes:StakeVM[]; last?:MarketVM; demo:"idle"|"running"|"done"; onRunDemo:() => void; controls:ReactNode}) {
   const phase = active?.phase ?? "idle";
-  return <Panel className="flex min-h-[620px] flex-col p-6 sm:p-8">
+  return <Panel className="flex min-h-[620px] min-w-0 flex-col p-6 sm:p-8">
     <div className="flex flex-wrap items-center justify-between gap-3"><h2 className="text-[13px] font-normal text-muted">{active ? "Trade under review" : "Active market"}</h2><Steps phase={phase}/></div>
     {loading && !active ? <div className="mt-6"><Loading what="the active market"/></div>
     : !active ? <div className="my-auto py-10">
@@ -158,7 +158,7 @@ function MarketPanel({loading, error, active, stakes, last, demo, live, onRunDem
         {demo === "running" && live && <p role="status" className="mt-3 max-w-[56ch] text-[13px] leading-6 text-muted">A live run has started on testnet. The trader resets the vault and reads market prices first, so the first proposal takes about a minute.</p>}
         {error && <div className="mt-4"><ErrorLine>{error}</ErrorLine></div>}
         <div className="mt-6 max-w-[60ch] rounded-3xl bg-fill p-5 text-[13px] leading-6"><p className="text-muted">Last verdict</p><p>{last ? lastVerdictText(last) : "No verdicts yet. The first proposal will appear here."}</p></div>
-        {demo !== "running" && <><Button variant="primary" className="mt-6" onClick={onRunDemo}><Icon name="play" className="size-4"/>{demo === "done" ? "Run demo again" : "Run demo"}</Button><p className="mt-3 text-[12px] text-muted">Three trades in about two and a half minutes: two pass, and the jury blocks one bad trade.</p></>}
+        {demo !== "running" && <><Button variant="primary" className="mt-6" onClick={onRunDemo}><Icon name="play" className="size-4"/>{demo === "done" ? "Run demo again" : "Run demo"}</Button><p className="mt-3 text-[12px] text-muted">Three trades in about four minutes: two pass, and the jury blocks one bad trade.</p></>}
       </div>
     : phase === "proposed" || phase === "instant" ? <div className="mt-8">
         <ProposalCard market={active}/>
@@ -167,7 +167,7 @@ function MarketPanel({loading, error, active, stakes, last, demo, live, onRunDem
     : phase === "open" ? <div className="mt-8">
         <div className="flex items-start justify-between gap-6"><ProposalCard market={active} compact/>{active.closeTime !== null && <Countdown closeTime={active.closeTime} openedAt={active.openedAt}/>}</div>
         <div className="mt-8"><StakesBar market={active}/></div>
-        <div className="mt-8 grid items-start gap-6 lg:grid-cols-[1fr_264px]"><div><p className="mb-2 text-[12px] text-muted">The jury</p><StakerList stakes={stakes}/></div>{controls}</div>
+        <div className="mt-8 grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_264px]"><div className="min-w-0"><p className="mb-2 text-[12px] text-muted">The jury</p><StakerList stakes={stakes}/></div>{controls}</div>
       </div>
     : <div className="mt-8">
         <div className="flex flex-wrap items-start justify-between gap-6"><ProposalCard market={active} compact/>{active.verdict && <VerdictStamp verdict={active.verdict} animate={phase === "verdict"}/>}</div>
