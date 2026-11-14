@@ -1,0 +1,321 @@
+{
+ "source": "real daily closing prices from Binance, 2026-07-13 to 2026-11-13; 1000 seeded random traders making 40 trades each; the jury's fixed fallback rules, with no model calls; each trade held for 3 days",
+ "trades": 40,
+ "generated_at": "2026-11-13T00:00:00.000Z",
+ "stats": {
+  "traders": 1000,
+  "median_drawdown_without_pct": 5.6,
+  "median_drawdown_with_pct": 2.2,
+  "bad_case_drawdown_without_pct": 10.9,
+  "bad_case_drawdown_with_pct": 4.5,
+  "median_final_without_usd": 10321,
+  "median_final_with_usd": 10159,
+  "worst_final_without_usd": 9261,
+  "worst_final_with_usd": 9758,
+  "share_ended_higher_with_pct": 43.8,
+  "share_smaller_drawdown_with_pct": 91.9
+ },
+ "without": {
+  "worst_drawdown_pct": 5.6,
+  "final_value_usd": 10388.93
+ },
+ "with": {
+  "worst_drawdown_pct": 0.9,
+  "final_value_usd": 10760.84
+ },
+ "series": [
+  {
+   "trade": 1,
+   "without_usd": 10008.13,
+   "with_usd": 10000
+  },
+  {
+   "trade": 2,
+   "without_usd": 10025.03,
+   "with_usd": 10000
+  },
+  {
+   "trade": 3,
+   "without_usd": 10037.97,
+   "with_usd": 10012.9
+  },
+  {
+   "trade": 4,
+   "without_usd": 10013.32,
+   "with_usd": 9988.32
+  },
+  {
+   "trade": 5,
+   "without_usd": 10038.6,
+   "with_usd": 10013.54
+  },
+  {
+   "trade": 6,
+   "without_usd": 10025.7,
+   "with_usd": 10000.67
+  },
+  {
+   "trade": 7,
+   "without_usd": 10039.81,
+   "with_usd": 10014.74
+  },
+  {
+   "trade": 8,
+   "without_usd": 9919.05,
+   "with_usd": 10014.74
+  },
+  {
+   "trade": 9,
+   "without_usd": 9923.83,
+   "with_usd": 10019.56
+  },
+  {
+   "trade": 10,
+   "without_usd": 9967.5,
+   "with_usd": 10063.65
+  },
+  {
+   "trade": 11,
+   "without_usd": 9962.33,
+   "with_usd": 10063.65
+  },
+  {
+   "trade": 12,
+   "without_usd": 9967.51,
+   "with_usd": 10068.88
+  },
+  {
+   "trade": 13,
+   "without_usd": 10278.54,
+   "with_usd": 10383.07
+  },
+  {
+   "trade": 14,
+   "without_usd": 10238.12,
+   "with_usd": 10383.07
+  },
+  {
+   "trade": 15,
+   "without_usd": 10244.63,
+   "with_usd": 10389.68
+  },
+  {
+   "trade": 16,
+   "without_usd": 9718.49,
+   "with_usd": 10389.68
+  },
+  {
+   "trade": 17,
+   "without_usd": 9703.04,
+   "with_usd": 10389.68
+  },
+  {
+   "trade": 18,
+   "without_usd": 9765.53,
+   "with_usd": 10456.6
+  },
+  {
+   "trade": 19,
+   "without_usd": 9762.16,
+   "with_usd": 10452.99
+  },
+  {
+   "trade": 20,
+   "without_usd": 9757.01,
+   "with_usd": 10447.47
+  },
+  {
+   "trade": 21,
+   "without_usd": 9809.01,
+   "with_usd": 10503.16
+  },
+  {
+   "trade": 22,
+   "without_usd": 9970.63,
+   "with_usd": 10676.21
+  },
+  {
+   "trade": 23,
+   "without_usd": 9986.76,
+   "with_usd": 10693.48
+  },
+  {
+   "trade": 24,
+   "without_usd": 10050.03,
+   "with_usd": 10761.23
+  },
+  {
+   "trade": 25,
+   "without_usd": 10115.54,
+   "with_usd": 10831.38
+  },
+  {
+   "trade": 26,
+   "without_usd": 10114.17,
+   "with_usd": 10829.9
+  },
+  {
+   "trade": 27,
+   "without_usd": 10098.1,
+   "with_usd": 10812.7
+  },
+  {
+   "trade": 28,
+   "without_usd": 10206.33,
+   "with_usd": 10812.7
+  },
+  {
+   "trade": 29,
+   "without_usd": 10158.58,
+   "with_usd": 10762.12
+  },
+  {
+   "trade": 30,
+   "without_usd": 10258.31,
+   "with_usd": 10762.12
+  },
+  {
+   "trade": 31,
+   "without_usd": 10237.82,
+   "with_usd": 10740.63
+  },
+  {
+   "trade": 32,
+   "without_usd": 10236.87,
+   "with_usd": 10739.62
+  },
+  {
+   "trade": 33,
+   "without_usd": 10595.68,
+   "with_usd": 10739.62
+  },
+  {
+   "trade": 34,
+   "without_usd": 10668.16,
+   "with_usd": 10739.62
+  },
+  {
+   "trade": 35,
+   "without_usd": 10665.43,
+   "with_usd": 10736.87
+  },
+  {
+   "trade": 36,
+   "without_usd": 10358.45,
+   "with_usd": 10736.87
+  },
+  {
+   "trade": 37,
+   "without_usd": 10393.67,
+   "with_usd": 10773.38
+  },
+  {
+   "trade": 38,
+   "without_usd": 10405.54,
+   "with_usd": 10785.69
+  },
+  {
+   "trade": 39,
+   "without_usd": 10381.57,
+   "with_usd": 10760.84
+  },
+  {
+   "trade": 40,
+   "without_usd": 10388.93,
+   "with_usd": 10760.84
+  }
+ ],
+ "blocked": [
+  {
+   "trade": 1,
+   "action": "Buy",
+   "asset": "DOGE",
+   "size_pct": 15,
+   "would_have_cost_usd": -8.13
+  },
+  {
+   "trade": 2,
+   "action": "Buy",
+   "asset": "SOL",
+   "size_pct": 12,
+   "would_have_cost_usd": -16.89
+  },
+  {
+   "trade": 8,
+   "action": "Buy",
+   "asset": "PEPE",
+   "size_pct": 35,
+   "would_have_cost_usd": 120.45
+  },
+  {
+   "trade": 11,
+   "action": "Buy",
+   "asset": "SOL",
+   "size_pct": 14,
+   "would_have_cost_usd": 5.22
+  },
+  {
+   "trade": 14,
+   "action": "Buy",
+   "asset": "DOGE",
+   "size_pct": 25,
+   "would_have_cost_usd": 40.83
+  },
+  {
+   "trade": 16,
+   "action": "Buy",
+   "asset": "WIF",
+   "size_pct": 40,
+   "would_have_cost_usd": 533.59
+  },
+  {
+   "trade": 17,
+   "action": "Buy",
+   "asset": "DOGE",
+   "size_pct": 45,
+   "would_have_cost_usd": 16.52
+  },
+  {
+   "trade": 28,
+   "action": "Buy",
+   "asset": "DOGE",
+   "size_pct": 40,
+   "would_have_cost_usd": -115.89
+  },
+  {
+   "trade": 30,
+   "action": "Buy",
+   "asset": "DOGE",
+   "size_pct": 30,
+   "would_have_cost_usd": -105.65
+  },
+  {
+   "trade": 33,
+   "action": "Buy",
+   "asset": "PEPE",
+   "size_pct": 20,
+   "would_have_cost_usd": -376.44
+  },
+  {
+   "trade": 34,
+   "action": "Buy",
+   "asset": "BONK",
+   "size_pct": 30,
+   "would_have_cost_usd": -73.46
+  },
+  {
+   "trade": 36,
+   "action": "Buy",
+   "asset": "BONK",
+   "size_pct": 35,
+   "would_have_cost_usd": 309.04
+  },
+  {
+   "trade": 40,
+   "action": "Buy",
+   "asset": "BONK",
+   "size_pct": 20,
+   "would_have_cost_usd": -7.63
+  }
+ ]
+}
